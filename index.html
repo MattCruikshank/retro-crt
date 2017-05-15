@@ -1,0 +1,196 @@
+<html>
+  <head>
+    <style>
+@font-face {
+    font-family: terminal;
+    //src: url("fonts/1971-ibm-3278/3270Medium.ttf");
+    //src: url("fonts/1977-apple2/PrintChar21.ttf");
+    src: url("fonts/1977-apple2/PRNumber3.ttf");
+    //src: url("fonts/1977-commodore-pet/COMMODORE_PET_2x.ttf");
+    //src: url("fonts/1977-commodore-pet/COMMODORE_PET_2y.ttf");
+    //src: url("fonts/1977-commodore-pet/COMMODORE_PET_64_2y.ttf");
+    //src: url("fonts/1977-commodore-pet/COMMODORE_PET_64.ttf"); // Looks a lot like Bard's Tale
+    //src: url("fonts/1977-commodore-pet/COMMODORE_PET_128_2y.ttf"); // failed
+    //src: url("fonts/1977-commodore-pet/COMMODORE_PET_128.ttf"); // failed
+    //src: url("fonts/1977-commodore-pet/COMMODORE_PET.ttf");
+    //src: url("fonts/1985-atari-st/AtariST8x16SystemFont.ttf");
+    //src: url("fonts/1985-ibm-pc-vga/Perfect DOS VGA 437 Win.ttf");
+    //src: url("fonts/1985-ibm-pc-vga/Perfect DOS VGA 437.ttf");
+    //src: url("fonts/modern-fixedsys-excelsior/FSEX301-L2.ttf");
+    //src: url("fonts/modern-hermit/Hermit-bold.otf"); // Looks very Star Trek
+    //src: url("fonts/modern-hermit/Hermit-light.otf");
+    //src: url("fonts/modern-hermit/Hermit-medium.otf");
+    //src: url("fonts/modern-inconsolata/Inconsolata.otf");
+    //src: url("fonts/modern-monaco/monaco.ttf");
+    //src: url("fonts/modern-pro-font-win-tweaked/ProFontWindows.ttf");
+    //src: url("fonts/modern-proggy-tiny/ProggyTiny.ttf"); // LOVE IT, except percent looks like ass
+    //src: url("fonts/modern-terminus/TerminusTTF-4.38.2.ttf"); // failed
+    //src: url("fonts/modern-terminus/TerminusTTF-Bold-4.38.2.ttf");
+}
+body {
+  //background-image: url("background.png");
+  background: #2F3531;
+  color: #00EDC8;
+  font-family: terminal, monospace;
+  white-space: pre;
+  font-size: 24px;
+  opacity: 1;
+  text-shadow: 0.5px 0 1px #90DFB0, -0.5px 0 1px #90DFB0;
+  //margin:12px;
+  margin-top:102px;
+  margin-left:256px;
+  margin-bottom:102px;
+  margin-right:260px;
+  padding:0; height:100%; width:100%;
+  height:100%;
+  width:100%;
+  overflow:hidden;
+  -webkit-touch-callout: none;
+    -webkit-user-select: none;
+     -khtml-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+  cursor:none;
+}
+body div {
+  //filter: blur(1px);
+  animation-name: flicker;
+  animation-duration: 0.2s;
+  animation-iteration-count: infinite;
+}
+body mark {
+  color: #2F3531;
+  background: #00EDC8;
+  text-shadow: initial;
+}
+body::before {
+  content: " ";
+  display: block;
+  position: absolute;
+  -webkit-filter: none;
+  filter: none;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: repeating-linear-gradient(
+    rgba(0, 0, 0, 0) 0px,
+    rgba(0, 0, 0, 0) 1px,
+    rgba(0, 0, 0, 0.0) 2px,
+    rgba(0, 0, 0, 0.8) 3px);
+  z-index: 2;
+  pointer-events: none;
+}
+@keyframes flicker {
+    0%   {
+        filter: brightness(1);
+        -webkit-filter: brightness(1);
+    }
+    89%   {
+        filter: brightness(1);
+        -webkit-filter: brightness(1);
+    }
+    90%  {
+        filter: brightness(0.7);
+        -webkit-filter: brightness(0.7);
+    }
+    100% {
+        filter: brightness(1);
+        -webkit-filter: brightness(1);
+    }
+}
+    </style>
+  </head>
+<body><div>Apple II System Utilities                                             Main Menu
+Version 3.1                                                           ESC: Quit
+―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――
+
+    Work on Entire Disks                  Work on Individual Files
+            
+      <mark>Catalog a Disk</mark>                        Copy Files
+      List Volumes                          Delete Files
+      Duplicate a Disk                      Rename Files
+      Format a Disk                         Lock/Unlock Files
+      Verify a Disk
+
+
+    Work on ProDOS Disks Only             Other Options
+
+      Create Subdirectory                   Set Serial Ports
+      Set Prefix                            About the System Utilities
+      Rename Volumes                        Quit
+
+
+Press ↓ ↑ ← → to select an option.
+Then press RETURN.
+―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――
+For Help: Press ?</div>
+<script>
+  function go_full_screen(){
+      var elem = document.documentElement;
+      if (elem.requestFullscreen) {
+        elem.requestFullscreen();
+      } else if (elem.msRequestFullscreen) {
+        elem.msRequestFullscreen();
+      } else if (elem.mozRequestFullScreen) {
+        elem.mozRequestFullScreen();
+      } else if (elem.webkitRequestFullscreen) {
+        elem.webkitRequestFullscreen();
+      }
+  }
+
+  var table = function() {
+    document.body.innerHTML="";
+    for(var i=0;i<255;++i) {
+      var t = document.createTextNode(i + " = " + String.fromCharCode(i) + "\n");
+      document.body.append(t);
+    }
+  }
+  //table();
+</script>
+</body>
+</html>
+<!--
+https://www.reddit.com/r/gamedev/comments/3jn44c/more_crt_shaders_for_pixel_art/
+  http://www.piratehearts.com/blog/2014/03/28/crt-simulation/
+
+http://frutbunn.com/index.php/2016/01/15/html5-canvas-and-codef-cathode-ray-tube-crt-emulator-library-version-0-3a/
+  http://frutbunn.com/codef/crtEmulator0_3a/canvasExample.html
+
+https://www.airtightinteractive.com/demos/js/badtvshader/
+https://github.com/felixturner/bad-tv-shader
+
+https://codepen.io/lbebber/pen/XJRdrV/
+
+http://www.lexaloffle.com/bbs/?tid=2555
+
+https://www.zachstronaut.com/posts/2012/08/17/webgl-fake-crt-html5.html
+
+http://clemz.io/article-retro-shaders-webgl.html
+
+http://oos.moxiecode.com/js_webgl/snes_retro/
+
+http://filthypants.blogspot.com/2011/05/more-emulator-pixel-shaders-crt-updated.html
+
+
+images of awful:
+  http://shmups.system11.org/viewtopic.php?f=6&t=43256&start=30
+
+Draw DOM into Canvas with SVG:
+https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Drawing_DOM_objects_into_a_canvas
+
+CSS text effects:
+https://line25.com/tutorials/how-to-create-a-cool-anaglyphic-text-effect-with-css
+
+http://www.designjuices.co.uk/2010/09/css3-tutorial-how-to-change-default-text-selection-colour/
+
+https://www.zachstronaut.com/posts/2010/03/28/css3-and-css2-text-effects.html
+
+https://css-tricks.com/fun-with-blurred-text/
+
+https://css-tricks.com/fun-with-blurred-text/
+
+Shadows:
+https://codemyviews.com/blog/inner-shadows-in-css-images-text-and-beyond
+-->
