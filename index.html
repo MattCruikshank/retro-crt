@@ -5,7 +5,7 @@
     font-family: terminal;
     //src: url("fonts/1971-ibm-3278/3270Medium.ttf");
     //src: url("fonts/1977-apple2/PrintChar21.ttf");
-    src: url("PRNumber3.ttf");
+    src: url("fonts/1977-apple2/PRNumber3.ttf");
     //src: url("fonts/1977-commodore-pet/COMMODORE_PET_2x.ttf");
     //src: url("fonts/1977-commodore-pet/COMMODORE_PET_2y.ttf");
     //src: url("fonts/1977-commodore-pet/COMMODORE_PET_64_2y.ttf");
@@ -28,23 +28,11 @@
     //src: url("fonts/modern-terminus/TerminusTTF-Bold-4.38.2.ttf");
 }
 body {
-  background: #000 url("background_clean_sized.png");
-  background-attachment: fixed ;
-  background-repeat: no-repeat;
-  background-size: contain;
-  background-position: center;
-  
-  //-webkit-mask-image: -webkit-gradient(linear, left 90%, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)))
-
-    
-  background: #000;
-  color: #00EDC8;
+  color: #77FFE8;
   font-family: terminal, monospace;
   white-space: pre;
   font-size: 24px;
-  opacity: 1;
-  text-shadow: 0.5px 0 1px #90DFB0, -0.5px 0 1px #90DFB0;
-  //margin:12px;
+  text-shadow: -1px 0 1px #00EDC8, 1px 0 1px #00EDC8, -2px 0 1px #008D78, 2px 0 1px #008D78;
   margin-top:102px;
   margin-left:256px;
   margin-bottom:102px;
@@ -72,16 +60,10 @@ body div {
 }
 body mark {
   color: #2F3531;
-  background: #00EDC8;
+  background: #77FFE8;
   text-shadow: initial;
 }
-#scanlines {
-  -webkit-mask-image:-webkit-repeating-linear-gradient(
-    rgba(0, 0, 0, 0) 0px,
-    rgba(0, 0, 0, 0) 1px,
-    rgba(0, 0, 0, 0.0) 2px,
-    rgba(0, 0, 0, 0.8) 3px);
-
+img {
   attachment: fixed;
   repeat: no-repeat;
   size: contain;
@@ -94,6 +76,14 @@ body mark {
   left: 0;
   bottom: 0;
   right: 0;
+  z-index: -1;
+}
+#scanlines {
+  -webkit-mask-image:-webkit-repeating-linear-gradient(
+    rgba(0, 0, 0, 0.1) 0px,
+    rgba(0, 0, 0, 0) 1px,
+    rgba(0, 0, 0, 0.1) 2px,
+    rgba(0, 0, 0, 0.7) 3px);
   z-index: 2;
 }
 @keyframes flicker {
@@ -116,13 +106,13 @@ body mark {
 }
     </style>
   </head>
-<body><div>Apple II System Utilities                                             Main Menu
+<body><div id="offscreen" style="display:none">Apple II System Utilities                                             Main Menu
 Version 3.1                                                           ESC: Quit
 ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――
 
     Work on Entire Disks                  Work on Individual Files
             
-      <mark>Catalog a Disk</mark>                        Copy Files
+      Catalog a Disk                        Copy Files
       List Volumes                          Delete Files
       Duplicate a Disk                      Rename Files
       Format a Disk                         Lock/Unlock Files
@@ -139,7 +129,7 @@ Version 3.1                                                           ESC: Quit
 Press ↓ ↑ ← → to select an option.
 Then press RETURN.
 ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――
-For Help: Press ?</div><img id="scanlines" src="background_clean_sized.png"/>
+For Help: Press ?</div><img src="background_clean_sized.png"/><div id="real"></div><img id="scanlines" src="background_clean_sized.png"/>
 <script>
   function go_full_screen(){
       var elem = document.documentElement;
@@ -162,6 +152,26 @@ For Help: Press ?</div><img id="scanlines" src="background_clean_sized.png"/>
     }
   }
   //table();
+  
+  var offscreen = document.getElementById("offscreen");
+  var real = document.getElementById("real");
+  
+  var c = 0;
+  var f = function() {
+    if (c < offscreen.innerText.length) {
+      real.innerText += offscreen.innerText[c];
+    }
+    do {
+      c++;
+      if ((c < offscreen.innerText.length) && (offscreen.innerText[c] == ' ')) {
+        real.innerText += offscreen.innerText[c];
+      } else {
+        break;
+      }
+    } while (true);
+  };
+  
+  setInterval(f, 10);
 </script>
 </body>
 </html>
