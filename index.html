@@ -5,7 +5,7 @@
     font-family: terminal;
     //src: url("fonts/1971-ibm-3278/3270Medium.ttf");
     //src: url("fonts/1977-apple2/PrintChar21.ttf");
-    src: url("PRNumber3.ttf");
+    src: url("fonts/1977-apple2/PRNumber3.ttf");
     //src: url("fonts/1977-commodore-pet/COMMODORE_PET_2x.ttf");
     //src: url("fonts/1977-commodore-pet/COMMODORE_PET_2y.ttf");
     //src: url("fonts/1977-commodore-pet/COMMODORE_PET_64_2y.ttf");
@@ -28,10 +28,16 @@
     //src: url("fonts/modern-terminus/TerminusTTF-Bold-4.38.2.ttf");
 }
 body {
-  background-image: url("background_clean.jpg");
+  background: #000 url("background_clean_sized.png");
+  background-attachment: fixed ;
   background-repeat: no-repeat;
   background-size: contain;
-  //background: #2F3531;
+  background-position: center;
+  
+  //-webkit-mask-image: -webkit-gradient(linear, left 90%, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)))
+
+    
+  background: #000;
   color: #00EDC8;
   font-family: terminal, monospace;
   white-space: pre;
@@ -54,20 +60,32 @@ body {
         -ms-user-select: none;
             user-select: none;
   cursor:none;
+  clip-path: rect(10px, 20px, 30px, 40px);
 }
 body div {
   //filter: blur(1px);
   //animation-name: flicker;
   //animation-duration: 0.2s;
   //animation-iteration-count: infinite;
+  
+  //mask: linear-gradient(black 0%, transparent 100%);
 }
 body mark {
   color: #2F3531;
   background: #00EDC8;
   text-shadow: initial;
 }
-body::before {
-  content: " ";
+#scanlines {
+  -webkit-mask-image:-webkit-repeating-linear-gradient(
+    rgba(0, 0, 0, 0) 0px,
+    rgba(0, 0, 0, 0) 1px,
+    rgba(0, 0, 0, 0.0) 2px,
+    rgba(0, 0, 0, 0.8) 3px);
+
+  attachment: fixed;
+  repeat: no-repeat;
+  size: contain;
+  position: center;
   display: block;
   position: absolute;
   -webkit-filter: none;
@@ -76,13 +94,7 @@ body::before {
   left: 0;
   bottom: 0;
   right: 0;
-  background: repeating-linear-gradient(
-    rgba(0, 0, 0, 0) 0px,
-    rgba(0, 0, 0, 0) 1px,
-    rgba(0, 0, 0, 0.0) 2px,
-    rgba(0, 0, 0, 0.8) 3px);
   z-index: 2;
-  pointer-events: none;
 }
 @keyframes flicker {
     0%   {
@@ -127,7 +139,7 @@ Version 3.1                                                           ESC: Quit
 Press ↓ ↑ ← → to select an option.
 Then press RETURN.
 ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――
-For Help: Press ?</div>
+For Help: Press ?</div><img id="scanlines" src="background_clean_sized.png"/>
 <script>
   function go_full_screen(){
       var elem = document.documentElement;
